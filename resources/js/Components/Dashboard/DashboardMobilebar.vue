@@ -1,7 +1,3 @@
-<script setup>
-
-</script>
-
 <template>
     <div class="col-lg-12 mobile-dashbord dashbord">
         <div class="dashboard_navigationbar dashxl">

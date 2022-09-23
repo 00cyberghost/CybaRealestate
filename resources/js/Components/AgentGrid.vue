@@ -11,10 +11,10 @@
             </div>
             <div class="row team-all">
                 <!--Team Block-->
-                <div class="team-block col-sm-6 col-md-4 col-lg-4 col-xl-2" data-aos="fade-up" data-aos-delay="150">
+                <div class="team-block col-sm-6 col-md-4 col-lg-4 col-xl-3" data-aos="fade-up" data-aos-delay="150">
                     <div class="inner-box team-details">
                         <div class="image team-head">
-                            <Link :href="route('agentDetails')"><img src="images/team/t-5.jpg" alt="" /></Link>
+                            <Link :href="'/agent-details/' + 1"><img src="images/team/t-5.jpg" alt="" /></Link>
                             <div class="team-hover">
                                 <ul class="team-social">
                                     <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
@@ -25,7 +25,7 @@
                             </div>
                         </div>
                         <div class="lower-box">
-                            <h3><Link :href="route('agentDetails')">Carls Jhons</Link></h3>
+                            <h3><Link :href="'/agent-details/' + 1">Carls Jhons</Link></h3>
                             <div class="designation">Real Estate Agent</div>
                         </div>
                     </div>

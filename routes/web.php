@@ -2,6 +2,8 @@
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\PropertyController;
 use Inertia\Inertia;
 
 /*
@@ -15,6 +17,12 @@ use Inertia\Inertia;
 |
 */
 
+// Route::resource('users', UsersController::class);
+
+
+
+Route::get('welcome',[PropertyController::class,'index']);
+
 Route::get('/', function () {
     return Inertia::render('Home');
 })->name('home');
@@ -27,13 +35,9 @@ Route::get('property-Details', function () {
     return Inertia::render('PropertyDetails');
 })->name('propertyDetails');
 
-Route::get('agents', function () {
-    return Inertia::render('Agents');
-})->name('agents');
+Route::get('agents',[UserController::class, 'listAgents'])->name('agents');
 
-Route::get('agent-details', function () {
-    return Inertia::render('AgentDetails');
-})->name('agentDetails');
+Route::get('agent-details/{id}',[UserController::class, 'showAgent'])->name('agentDetails');
 
 Route::get('agencies', function () {
     return Inertia::render('Agencies');
@@ -58,6 +62,9 @@ Route::get('requests', function () {
 Route::get('faq', function () {
     return Inertia::render('Faq');
 })->name('faq');
+
+
+
 
 //dashboard routes
 require __DIR__.'/dashboard.php';

@@ -1,12 +1,11 @@
 <script setup>
-    import { Link } from '@inertiajs/inertia-vue3'
     import { onMounted,onUnmounted } from 'vue'
 
     onMounted(() => {
 
             //add the dashboard css stylesheet immediately the component mounts and some other classes that are necessary for page responsiveness
-            $('#search-form').append('<link id="dashboard-style" rel="stylesheet" href="css/dashbord-mobile-menu.css"><link rel="stylesheet" href="css/swiper.min.css">');
-            $('body').addClass('inner-pages maxw1600 m0a dashboard-bd ui-elements');
+            $('#search-form').append('<link id="dashboard-style" rel="stylesheet"><link rel="stylesheet" href="/css/swiper.min.css">');
+            $('body').addClass('maxw1600 m0a dashboard-bd');
             $('#wrapper').addClass('int_main_wraapper');
         
 
@@ -83,7 +82,7 @@
     //when the component is unmounted
     onUnmounted(() => {
         //remove the classes that was added to the body tag during component mounting
-        $('body').removeClass('inner-pages maxw1600 m0a dashboard-bd ui-elements');
+        $('body').removeClass('maxw1600 m0a dashboard-bd');
     })
 </script>
 <template>
@@ -99,7 +98,7 @@
                     <div class="left-side">
                         <!-- Logo -->
                         <div id="logo">
-                            <a href="index.html"><img src="/images/logo.svg" alt=""></a>
+                            <Link :href="route('home')"><img src="/images/logo.svg" alt=""></link>
                         </div>
                         <!-- Mobile Navigation -->
                         <div class="mmenu-trigger">
@@ -127,13 +126,13 @@
                     <!-- Right Side Content / --> 
                     <div class="header-user-menu user-menu">
                         <div class="header-user-name">
-                            <span><img src="/images/testimonials/ts-1.jpg" alt=""></span>Hi, {{ $page.props.auth.user.name }}!
+                            <span><img src="/images/testimonials/ts-1.jpg" alt=""></span>{{ $page.props.auth.user.name.slice(0,6) + '..' }}!
                         </div>
                         <ul>
                             <li><Link :href="route('myRequests')">My requests</Link></li>
                             <li><Link :href="route('myAlerts')">My alerts</Link></li>
         
-                            <li><Link :href="route('logout')" method="post" as="button">Log Out</Link></li>
+                            <li><Link class="pl-3" :href="route('logout')" method="post" as="button">Log Out</Link></li>
                         </ul>
                     </div>
                     <!-- Right Side Content / End -->
@@ -145,3 +144,113 @@
     <div class="clearfix"></div>
     <!-- Header Container / End -->
 </template>
+<style>
+
+.dashboard_navigationbar {
+    margin-bottom: 30px;
+}
+.dashboard_navigationbar .dropbtn {
+    background-color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 5px;
+    display: block;
+    height: 70px;
+    margin-bottom: 30px;
+    outline: none;
+    padding: 20px 30px;
+    position: relative;
+    text-align: left;
+    width: 100%;
+}
+.dashboard_navigationbar .dropbtn:hover,
+.dashboard_navigationbar .dropbtn:focus {
+    background-color: rgb(255, 255, 255);
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+.dashboard_navigationbar .dropdown {
+    position: relative;
+}
+.dashboard_navigationbar .dropdown-content {
+    box-shadow: none;
+    display: none;
+    height: auto;
+    min-width: 160px;
+    overflow: auto;
+    position: absolute;
+    top: 0;
+}
+.dashboard_navigationbar .dropdown-content a,button {
+    color: black;
+    padding: 10px 16px;
+    text-decoration: none;
+    display: block;
+}
+.dashboard_navigationbar .dropdown-content li {
+    height: 50px;
+    line-height: 30px;
+    padding-left: 0;
+    position: relative;
+}
+.dashboard_navigationbar .dropdown-content li a {
+    font-size: 16px;
+}
+.dashboard_navigationbar .dropdown-content li a span {
+    font-size: 23px;
+    padding-right: 10px;
+}
+.dashboard_navigationbar .dropdown-content li.active {
+    background-color: #ffffff;
+}
+.dashboard_navigationbar .dropdown-content li a.active:before {
+    background-color: #274abb;
+    bottom: 0;
+    content: "";
+    height: 50px;
+    position: absolute;
+    right: 0px;
+    top: 0;
+    width: 2px;
+}
+.dashboard_navigationbar .dropdown-content li a.active {
+    color: #274abb;
+}
+.dashboard_navigationbar .dropdown a:hover {
+    color: #004a97;
+}
+.dashboard_navigationbar .show {
+    display: block;
+    background: #fff;
+    -webkit-animation: fadein 2s;
+    -moz-animation: fadein 2s;
+    -ms-animation: fadein 2s;
+    -o-animation: fadein 2s;
+    animation: fadein 1s;
+    overflow: hidden;
+    padding: 15px 0;
+    position: relative;
+    min-height: auto;
+    min-width: auto;
+    width: 100%;
+}
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@media only screen and (max-width: 992px) {
+    .mobile-dashbord.dashbord {
+        padding-top: 45px;
+    }
+}
+@media only screen and (min-width: 1025px) {
+    .dashxl {
+        display: none;
+    }
+}
+
+</style>

@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PropertyController;
 use Inertia\Inertia;
 
 
@@ -26,6 +27,19 @@ Route::middleware(['auth'])->group(function () {
         return Inertia::render('Dashboard/AddProperty');
     })->name('addProperty');
     
+    //upload a property
+    Route::post('dashboard/submit-property',[PropertyController::class, 'store'])->name('submit-property');
+    
+    //upload image route
+    Route::post('dashboard/uploads',[PropertyController::class, 'savePropertyImages'])->name('uploads');
+    
+    //get the property upload image page
+    Route::get('dashboard/upload-image', function () {
+        
+        return Inertia::render('Dashboard/PropertyImages');
+
+    })->name('images');
+    
     Route::get('dashboard/my-alerts', function () {
         return Inertia::render('Dashboard/MyAlerts');
     })->name('myAlerts');
@@ -38,7 +52,7 @@ Route::middleware(['auth'])->group(function () {
         return Inertia::render('Dashboard/MyRequests');
     })->name('myRequests');
     
-    Route::get('dashboard/createequest', function () {
+    Route::get('dashboard/create-request', function () {
         return Inertia::render('Dashboard/CreateRequest');
     })->name('createRequest');
     

@@ -22,6 +22,11 @@
         $('body').removeClass('inner-pages agents homepage-4 det hd-white');
     })
 
+    defineProps({
+        user : Array
+
+    })
+
 </script>
 
 <template>
@@ -42,33 +47,33 @@
                                             <div class="text-heading text-left">
                                                 <p> <Link :href="route('home')">Home </Link> &nbsp;/&nbsp; <span>Agent Single</span></p>
                                             </div>
-                                            <h3>Carls Jhons</h3>
+                                            <h3>{{user.name}}</h3>
                                         </div>
                                     </div>
                                 </div>
                             </section>
                             <div class="news-item news-item-sm">
-                                <Link :href="route('agentDetails')" class="news-img-link">
+                                <Link :href="`/agent-details/${user.id}`" class="news-img-link">
                                     <div class="news-item-img homes">
                                         <div class="homes-tag button alt featured">4 Listings</div>
-                                        <img class="resp-img" src="images/team/a-1.png" alt="blog image">
+                                        <img class="resp-img" src="/images/team/a-1.png" alt="blog image">
                                     </div>
                                 </Link>
                                 <div class="news-item-text">
-                                    <Link :href="route('agentDetails')"><h3>Carls Jhons</h3></Link>
+                                    <Link :href="`/agent-details/${user.id}`"><h3>{{user.name}}</h3></Link>
                                     <div class="the-agents">
                                         <ul class="the-agents-details">
-                                            <li><a href="#">Office: (234) 0200 17813</a></li>
-                                            <li><a href="#">Mobile: (657) 9854 12095</a></li>
-                                            <li><a href="#">Fax: 809 123 0951</a></li>
-                                            <li><a href="#">Email: info@agent.com</a></li>
+                                            <li><a>{{user.name}}</a></li>
+                                            <li><a>{{user.phone}}</a></li>
+                                            <li><a>{{user.whatsapp}}</a></li>
+                                            <li><a>{{user.email}}</a></li>
                                         </ul>
                                     </div>
                                     <div class="news-item-bottom">
-                                        <Link :href="route('agentDetails')" class="news-link">View My Listings</Link>
+                                        <Link :href="`/agent-details/${user.id}`" class="news-link">View My Listings</Link>
                                         <div class="admin">
-                                            <p>Company Name</p>
-                                            <img src="images/partners/1.png" alt="">
+                                            <p>{{user.name}}</p>
+                                            <img src="/images/partners/1.png" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -78,8 +83,7 @@
                     <div class="blog-pots py-0">
                         <div class="blog-info details mb-30">
                             <h5 class="mb-4">Description</h5>
-                            <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum rerum beatae consequatur, totam fugit, alias fuga aliquam quod tempora a nisi esse magnam nulla quas! Error praesentium, vero dolorum laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum rerum beatae consequatur, totam.</p>
-                            <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum rerum beatae consequatur, totam fugit, alias fuga aliquam quod tempora a nisi esse magnam nulla quas! Error praesentium, vero dolorum laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum rerum beatae consequatur, totam.</p>
+                            <p class="mb-3">{{user.about}}</p>
                         </div>
                         <!-- START SIMILAR PROPERTIES -->
                         <section class="similar-property featured portfolio bshd p-0 bg-white">
@@ -95,7 +99,7 @@
                                                         <div class="homes-tag button alt featured">Featured</div>
                                                         <div class="homes-tag button alt sale">For Sale</div>
                                                         <div class="homes-price">$9,000</div>
-                                                        <img src="images/blog/b-11.jpg" alt="home-1" class="img-responsive">
+                                                        <img src="/images/blog/b-11.jpg" alt="home-1" class="img-responsive">
                                                     </Link>
                                                 </div>
                                                 <div class="button-effect">

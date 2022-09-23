@@ -1,7 +1,7 @@
 <script setup>
     import InputError from '@/Components/InputError.vue';
     import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
-    import { onMounted,onUnmounted } from 'vue';
+    import { onMounted,onUnmounted,ref } from 'vue';
     
     const form = useForm({
         category: '',

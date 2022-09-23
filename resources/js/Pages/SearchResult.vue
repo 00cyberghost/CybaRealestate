@@ -93,7 +93,7 @@
                             <div class="button-effect">
                                 <Link :href="route('propertyDetails')" class="btn"><i class="fa fa-link"></i></Link>
                                 <a target="_blank" href="https://www.youtube.com/watch?v=2xHQqYRcrx4" class="btn popup-video popup-youtube"><i class="fas fa-video"></i></a>
-                                <Link :href="route('propertyDetails')" class="img-poppu btn"><i class="fa fa-photo"></i></Link>
+                                <Link :href="route('propertyDetails') + '/id/1'" class="img-poppu btn"><i class="fa fa-photo"></i></Link>
                             </div>
                         </div>
                         <!-- homes content -->
@@ -142,7 +142,7 @@
                                 </div>
                             </div>
                             <div class="footer">
-                                <Link :href="route('agentDetails')">
+                                <Link :href="route('propertyDetails')">
                                     <i class="fa fa-user"></i> Jhon Doe
                                 </Link>
                                 <span>

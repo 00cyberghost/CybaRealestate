@@ -7733,6 +7733,13 @@ html input[disabled] {
   margin-top: 30px;
 }
 
+.header-widget.sign-in button {
+  
+  white-space: nowrap;
+}
+
+
+
 .hd-white .header-widget.sign-in a,
 .hd-white .show-lang,
 .hd-white .show-lang .fa-caret-down.arrlan {
@@ -18507,6 +18514,15 @@ a.button {
 }
 
 .user-profile-box .detail ul li a {
+  color: #aeb7c2;
+  padding: 12px 50px;
+  display: block;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.user-profile-box .detail ul li button {
   color: #aeb7c2;
   padding: 12px 50px;
   display: block;

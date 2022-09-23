@@ -40,7 +40,7 @@ onMounted(() => {
                 <div class="widget-boxed-body">
                     <div class="sidebar-widget author-widget2">
                         <div class="author-box clearfix">
-                            <img src="images/testimonials/ts-1.jpg" alt="author-image" class="author__img">
+                            <img src="/images/testimonials/ts-1.jpg" alt="author-image" class="author__img">
                             <h4 class="author__title">Lisa Clark</h4>
                             <p class="author__meta">Agent of Property</p>
                         </div>
@@ -72,7 +72,7 @@ onMounted(() => {
 
                             <div class="recent-main">
                                 <div class="recent-img">
-                                    <a href="blog-details.html"><img src="images/feature-properties/fp-1.jpg" alt=""></a>
+                                    <a href="blog-details.html"><img src="/images/feature-properties/fp-1.jpg" alt=""></a>
                                 </div>
                                 <div class="info-img">
                                     <a href="blog-details.html"><h6>Family Home</h6></a>
@@ -106,7 +106,7 @@ onMounted(() => {
                                                 <li>Baths <span>3</span></li>
                                             </ul>
                                         </div>
-                                        <img src="images/feature-properties/fp-1.jpg" alt="">
+                                        <img src="/images/feature-properties/fp-1.jpg" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -120,7 +120,7 @@ onMounted(() => {
                         <h4>Specials of the day</h4>
                     </div>
                     <div class="widget-boxed-body">
-                        <div class="banner"><img src="images/single-property/banner.jpg" alt=""></div>
+                        <div class="banner"><img src="/images/single-property/banner.jpg" alt=""></div>
                     </div>
                 </div>
                 <!-- End: Specials offer -->

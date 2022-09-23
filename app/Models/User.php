@@ -61,14 +61,27 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
+   
     /**
-     * The agency that owns to the User
+     * Get the agency that owns the User
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function agency(): BelongsToMany
+    public function agency(): BelongsTo
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsTo(Agency::class);
     }
+
+
+    /**
+     * Get the image that owns the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function image(): BelongsTo
+    {
+        return $this->belongsTo(Image::class);
+    }
+
     
 }

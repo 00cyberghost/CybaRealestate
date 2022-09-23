@@ -1,24 +1,25 @@
 <script setup>
-import { Head, Link } from '@inertiajs/inertia-vue3';
+import { Head } from '@inertiajs/inertia-vue3';
 import DashboardHeader from '@/Components/Dashboard/DashboardHeader.vue'
 import DashboardSidebar from '@/Components/Dashboard/DashboardSidebar.vue'
 import DashboardMobilebar from '@/Components/Dashboard/DashboardMobilebar.vue'
 import DashboardFooter from '@/Components/Dashboard/DashboardFooter.vue'
 import DashboardPagination from '@/Components/Dashboard/DashboardPagination.vue'
 import Button from '@/Components/Button.vue';
-import { onMounted } from 'vue'
+import { onMounted,onUnmounted } from 'vue'
 
 
 onMounted(() => {
+$('body').addClass('inner-pages maxw1600 m0a dashboard-bd ui-elements');
     
-    var states = $('#state');
+var states = $('#state');
 
 var localGovernments = $('#local_government');
 
 //loads states from a json file in when the document is loading
 function loadStates(){
 
-    fetch('./json/states.json').
+    fetch('/json/states.json').
     then(function(response){
 
         return response.json();
@@ -274,6 +275,12 @@ bindSelectToOne('unit');
 
 
 
+})
+
+//when the component is unmounted
+onUnmounted(() => {
+    //remove the classes that was added to the body tag during component mounting
+    $('body').removeClass('inner-pages maxw1600 m0a dashboard-bd ui-elements');
 })
 
 

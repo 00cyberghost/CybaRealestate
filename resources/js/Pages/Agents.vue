@@ -4,6 +4,14 @@
     import Pagination from "@/Components/Pagination.vue"
     import Footer from "@/Components/Footer.vue"
     import { onMounted,onUnmounted } from 'vue'
+
+    
+    defineProps({
+        users : Array
+
+    })
+
+    
     
     onMounted(() => {
 
@@ -62,49 +70,50 @@
                                 </div>
                                 <div class="sorting-options">
                                     <a href="#" class="change-view-btn active-view-btn"><i class="fa fa-th-list"></i></a>
-                                    <Link :href="route('agentDetails')" class="change-view-btn lde"><i class="fa fa-th-large"></i></Link>
                                 </div>
                             </div>
                         </div>
                     </section>
+                </div>
+                
+                <div class="col-lg-12 agent-mb" v-for="user in users" :key="user.id">
                     <div class="agent agent-row shadow-hover">
-                        <Link :href="route('agentDetails')" class="agent-img">
+                        <Link :href="`/agent-details/${user.id}`" class="agent-img">
                             <div class="img-fade"></div>
                             <div class="button alt agent-tag">60 Properties</div>
-                            <img src="images/team/t-1.jpg" alt="" />
+                            <img src="/images/team/t-2.jpg" alt="" />
                         </Link>
                         <div class="agent-content">
                             <div class="agent-details">
-                                <h4><Link :href="route('agentDetails')">CARLS JHONS</Link></h4>
-                                <p><i class="fa fa-tag icon"></i>Selling Agent</p>
-                                <p><i class="fa fa-envelope icon"></i>carls@realhome.com</p>
-                                <p><i class="fa fa-phone icon"></i>(234) 200-7813</p>
+                                <h4><Link :href="`/agent-details/${user.id}`">{{user.name}}</Link></h4>
+                                <p><i class="fa fa-envelope icon"></i>{{user.email}}</p>
+                                <p><i class="fa fa-phone icon"></i>{{user.phone}}</p>
+                                <p><i class="fa fa-whatsapp icon"></i>{{user.whatsapp}}</p>
                             </div>
                             <div class="agent-text">
-                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet...</p>
+                                <p>{{user.about}}</p>
                             </div>
                             <div class="agent-footer center">
                                 <ul class="netsocials">
-                                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
+                                    <li><a target="_blank" href="{{user.facebook}}"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                    <li><a target="_blank" href="{{user.twitter}}"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                    <li><a target="_blank" href="{{user.email}}"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                                    <li><a target="_blank" href="{{user.youtube}}"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="clear"></div>
                     </div>
                 </div>
-                
-                
-                
+          
+             
             </div>
             <!-- end row -->
         </div>
     </section>
     <!-- END SECTION AGENTS -->
 
-        <Pagination />
+    <Pagination />
 
 
     <Footer />

@@ -7,7 +7,7 @@
             <ul class="col-12 commented pl-0">
                 <li class="comm-inf">
                     <div class="col-md-2">
-                        <img src="images/testimonials/ts-5.jpg" class="img-fluid" alt="">
+                        <img src="/images/testimonials/ts-5.jpg" class="img-fluid" alt="">
                     </div>
                     <div class="col-md-10 comments-info">
                         <div class="conra">
@@ -24,7 +24,7 @@
                         </div>
                         <p class="mb-4">May 30 2020</p>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam, quam congue dictum luctus, lacus magna congue ante, in finibus dui sapien eu dolor. Integer tincidunt suscipit erat, nec laoreet ipsum vestibulum sed.</p>
-                        <div class="rest"><img src="images/single-property/s-1.jpg" class="img-fluid" alt=""></div>
+                        <div class="rest"><img src="/images/single-property/s-1.jpg" class="img-fluid" alt=""></div>
                     </div>
                 </li>
 

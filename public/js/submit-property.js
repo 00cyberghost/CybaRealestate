@@ -13,7 +13,7 @@ $(function(){
     //loads states from a json file in when the document is loading
 	function loadStates(){
 
-		fetch('./json/states.json').
+		fetch('../json/states.json').
 		then(function(response){
 
 			return response.json();
@@ -42,7 +42,7 @@ $(function(){
 
 		localGovernments.empty();
 
-		fetch('./json/states.json').
+		fetch('../json/states.json').
 		then(function(response){
 
 			return response.json();
