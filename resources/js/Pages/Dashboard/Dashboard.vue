@@ -1,369 +1,344 @@
 <script setup>
-import { Head, Link } from '@inertiajs/inertia-vue3';
-import DashboardHeader from '@/Components/Dashboard/DashboardHeader.vue'
-import DashboardSidebar from '@/Components/Dashboard/DashboardSidebar.vue'
-import DashboardMobilebar from '@/Components/Dashboard/DashboardMobilebar.vue'
-import DashboardFooter from '@/Components/Dashboard/DashboardFooter.vue'
-import { onMounted } from 'vue'
+    import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
+    import DashboardLayout from "@/Layouts/DashboardLayout.vue"
+    import InputError from '@/Components/InputError.vue'
+    import { onMounted,onUnmounted,ref,onUpdated } from 'vue'
+    // import Dashboard from 'vendor/laravel/breeze/stubs/inertia-react/resources/js/Pages/Dashboard';
+
+    defineProps({
+        
+        props: Object
+    })
+
+
+    let domain_name = location.hostname
+
+    //show or hide review details
+    const toggleReviewForm = (e) => {
+
+        let hasClass = document.getElementById('review-form').classList.contains('d-none')
+
+        if(hasClass == true){
+
+        document.getElementById('review-form').classList.remove('d-none')
+
+            e.target.textContent = 'Hide Reviews'
+
+        }else{
+
+            document.getElementById('review-form').classList.add('d-none')
+
+            e.target.textContent = 'Show Reviews'
+        }
+    }
+
+
+    //show or hide listing details
+    const toggleListing = (e) => {
+
+        let hasClass = document.getElementById('listing-form').classList.contains('d-none')
+
+        if(hasClass == true){
+
+        document.getElementById('listing-form').classList.remove('d-none')
+
+            e.target.textContent = 'Hide Listings'
+
+        }else{
+
+            document.getElementById('listing-form').classList.add('d-none')
+
+            e.target.textContent = 'Show Listings'
+        }
+
+
+    }
+
+    //copy registration link
+    const copyLink = () => {
+
+        var a = document.getElementById('myInput')
+                            
+        a.select();
+        
+        a.setSelectionRange(0, 99999);
+        
+        document.execCommand("copy");
+        
+        alert("Copied: " + a.value);
+    }
 
 
 
-onMounted(() => {
-
-    $(".header-user-name").on("click", function() {
-        $(".header-user-menu ul").toggleClass("hu-menu-vis");
-        $(this).toggleClass("hu-menu-visdec");
-    });
 
 
+    onMounted(() => {$('body').addClass('inner-pages maxw1600 m0a dashboard-bd')})
 
-})
+    onUnmounted(() => $('body').removeClass('inner-pages maxw1600 m0a dashboard-bd'))
 
 
 
 
 
 </script>
+
 <template>
-<Head title="Dashboard" />
-<DashboardHeader />
-<!-- START SECTION DASHBOARD -->
-<section class="user-page section-padding">
-    <div class="container-fluid">
-        <div class="row">
+    <Head title="My Dashboard" />
+    <DashboardLayout :props="props">
 
-            <!--dashboardsidebar-->
-            <DashboardSidebar />
-            <!--dashboardsidebar---->
-
-            <div class="col-lg-9 col-md-12 col-xs-12 pl-0 user-dash2">
-
-                <!--MobileSidebar-->
-                <DashboardMobilebar />
-                <!--MobileSidebar end-->
-
-                <div class="dashborad-box stat bg-white">
-                    <h4 class="title">Manage Dashboard</h4>
-                    <div class="section-body">
-                        <div class="row">
-                            <div class="col-lg-3 col-md-6 col-xs-12 dar pro mr-3">
-                                <div class="item">
-                                    <div class="icon">
-                                        <i class="fa fa-list" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="info">
-                                        <h6 class="number">345</h6>
-                                        <p class="type ml-1">Published Property</p>
-                                    </div>
-                                </div>
+        <div class="dashborad-box stat bg-white curved">
+            <h4 class="title">Manage Dashboard</h4>
+            <div class="section-body">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-xs-12 dar pro mr-3">
+                        <div class="item">
+                            <div class="icon">
+                                <i class="fas fa-laptop-house" aria-hidden="true"></i>
                             </div>
-                            <div class="col-lg-3 col-md-6 col-xs-12 dar rev mr-3">
-                                <div class="item">
-                                    <div class="icon">
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <div class="info">
-                                        <h6 class="number">116</h6>
-                                        <p class="type ml-1">Total Reviews</p>
-                                    </div>
-                                </div>
+                            <div class="info">
+                                <h6 class="number">{{ props.dashboard_count.dashboard_property_count }}</h6>
+                                <p class="type ml-1">Published Property</p>
                             </div>
-                            <div class="col-lg-3 col-md-6 dar com mr-3">
-                                <div class="item mb-0">
-                                    <div class="icon">
-                                        <i class="fas fa-comments"></i>
-                                    </div>
-                                    <div class="info">
-                                        <h6 class="number">223</h6>
-                                        <p class="type ml-1">Messages</p>
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-xs-12 dar rev mr-3">
+                        <div class="item">
+                            <div class="icon">
+                                <i class="fas fa-star"></i>
                             </div>
-                            <div class="col-lg-3 col-md-6 dar booked">
-                                <div class="item mb-0">
-                                    <div class="icon">
-                                        <i class="fas fa-heart"></i>
-                                    </div>
-                                    <div class="info">
-                                        <h6 class="number">432</h6>
-                                        <p class="type ml-1">Times Bookmarked</p>
-                                    </div>
-                                </div>
+                            <div class="info">
+                                <h6 class="number">{{ props.average_review }}.0</h6>
+                                <p class="type ml-1">Rating</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 dar com mr-3">
+                        <div class="item mb-0">
+                            <div class="icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="info">
+                                <h6 class="number">{{ props.user.views }}</h6>
+                                <p class="type ml-1">Total Views</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 dar booked">
+                        <div class="item mb-0">
+                            <div class="icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="info">
+                                <h6 class="number">{{ props.dashboard_count.dashboard_bookmark_count }}</h6>
+                                <p class="type ml-1">Times Bookmarked</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="dashborad-box">
-                    <h4 class="title">Listing</h4>
-                    <div class="section-body listing-table">
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Listing Name</th>
-                                        <th>Date</th>
-                                        <th>Rating</th>
-                                        <th>Status</th>
-                                        <th>Edit</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Luxury Restaurant</td>
-                                        <td>23 Jan 2020</td>
-                                        <td class="rating"><span>5.0</span></td>
-                                        <td class="status"><span class=" active">Active</span></td>
-                                        <td class="edit"><a href="#"><i class="fa fa-pencil"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gym in Town</td>
-                                        <td>11 Feb 2020</td>
-                                        <td class="rating"><span>4.5</span></td>
-                                        <td class="status"><span class="active">Active</span></td>
-                                        <td class="edit"><a href="#"><i class="fa fa-pencil"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cafe in Boston</td>
-                                        <td>09 Jan 2020</td>
-                                        <td class="rating"><span>5.0</span></td>
-                                        <td class="status"><span class="non-active">Non-Active</span></td>
-                                        <td class="edit"><a href="#"><i class="fa fa-pencil"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="pb-0">Car Dealer in New York</td>
-                                        <td class="pb-0">24 Feb 2018</td>
-                                        <td class="rating pb-0"><span>4.5</span></td>
-                                        <td class="status pb-0"><span class="active">Active</span></td>
-                                        <td class="edit pb-0"><a href="#"><i class="fa fa-pencil"></i></a></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="dashborad-box">
-                    <h4 class="title">Message</h4>
-                    <div class="section-body">
-                        <div class="messages">
-                            <div class="message">
-                                <div class="thumb">
-                                    <img class="img-fluid" src="images/testimonials/ts-1.jpg" alt="">
-                                </div>
-                                <div class="body">
-                                    <h6>Mary Smith</h6>
-                                    <p class="post-time">22 Minutes ago</p>
-                                    <p class="content mb-0 mt-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore</p>
-                                    <div class="controller">
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-eye"></i></a></li>
-                                            <li><a href="#"><i class="far fa-trash-alt"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="message">
-                                <div class="thumb">
-                                    <img class="img-fluid" src="images/testimonials/ts-2.jpg" alt="">
-                                </div>
-                                <div class="body">
-                                    <h6>Karl Tyron</h6>
-                                    <p class="post-time">23 Minutes ago</p>
-                                    <p class="content mb-0 mt-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore</p>
-                                    <div class="controller">
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-eye"></i></a></li>
-                                            <li><a href="#"><i class="far fa-trash-alt"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="message">
-                                <div class="thumb">
-                                    <img class="img-fluid" src="images/testimonials/ts-3.jpg" alt="">
-                                </div>
-                                <div class="body">
-                                    <h6>Lisa Willis</h6>
-                                    <p class="post-time">53 Minutes ago</p>
-                                    <p class="content mb-0 mt-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore</p>
-                                    <div class="controller">
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-eye"></i></a></li>
-                                            <li><a href="#"><i class="far fa-trash-alt"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="dashborad-box">
-                    <h4 class="title">Review</h4>
-                    <div class="section-body">
-                        <div class="reviews">
-                            <div class="review">
-                                <div class="thumb">
-                                    <img class="img-fluid" src="images/testimonials/ts-4.jpg" alt="">
-                                </div>
-                                <div class="body">
-                                    <h5>Family House</h5>
-                                    <h6>Mary Smith</h6>
-                                    <p class="post-time">10 hours ago</p>
-                                    <p class="content mb-0 mt-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore</p>
-                                    <ul class="starts mb-0">
-                                        <li><i class="fa fa-star"></i>
-                                        </li>
-                                        <li><i class="fa fa-star"></i>
-                                        </li>
-                                        <li><i class="fa fa-star"></i>
-                                        </li>
-                                        <li><i class="fa fa-star"></i>
-                                        </li>
-                                        <li><i class="fa fa-star-o"></i>
-                                        </li>
-                                    </ul>
-                                    <div class="controller">
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-eye"></i></a></li>
-                                            <li><a href="#"><i class="far fa-trash-alt"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="review">
-                                <div class="thumb">
-                                    <img class="img-fluid" src="images/testimonials/ts-5.jpg" alt="">
-                                </div>
-                                <div class="body">
-                                    <h5>Bay Apartment</h5>
-                                    <h6>Karl Tyron</h6>
-                                    <p class="post-time">22 hours ago</p>
-                                    <p class="content mb-0 mt-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore</p>
-                                    <ul class="starts mb-0">
-                                        <li><i class="fa fa-star"></i>
-                                        </li>
-                                        <li><i class="fa fa-star"></i>
-                                        </li>
-                                        <li><i class="fa fa-star"></i>
-                                        </li>
-                                        <li><i class="fa fa-star"></i>
-                                        </li>
-                                        <li><i class="fa fa-star-o"></i>
-                                        </li>
-                                    </ul>
-                                    <div class="controller">
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-eye"></i></a></li>
-                                            <li><a href="#"><i class="far fa-trash-alt"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="review">
-                                <div class="thumb">
-                                    <img class="img-fluid" src="images/testimonials/ts-6.jpg" alt="">
-                                </div>
-                                <div class="body">
-                                    <h5>Family House Villa</h5>
-                                    <h6>Lisa Willis</h6>
-                                    <p class="post-time">51 hours ago</p>
-                                    <p class="content mb-0 mt-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore</p>
-                                    <ul class="starts mb-0">
-                                        <li><i class="fa fa-star"></i>
-                                        </li>
-                                        <li><i class="fa fa-star"></i>
-                                        </li>
-                                        <li><i class="fa fa-star"></i>
-                                        </li>
-                                        <li><i class="fa fa-star"></i>
-                                        </li>
-                                        <li><i class="fa fa-star-o"></i>
-                                        </li>
-                                    </ul>
-                                    <div class="controller">
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-eye"></i></a></li>
-                                            <li><a href="#"><i class="far fa-trash-alt"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="dashborad-box mb-0">
-                    <h4 class="heading pt-0">Personal Information</h4>
-                    <div class="section-inforamation">
-                        <form>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>First Name</label>
-                                        <input type="text" class="form-control" placeholder="Enter your First name">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Last Name</label>
-                                        <input type="text" class="form-control" placeholder="Enter your Last name">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Email Address</label>
-                                        <input type="text" class="form-control" placeholder="Ex: example@domain.com">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Phone Number</label>
-                                        <input type="text" class="form-control" placeholder="Ex: +1-800-7700-00">
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label>Address</label>
-                                        <textarea name="address" class="form-control" placeholder="Write your address here"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label>About Yourself</label>
-                                        <textarea name="address" class="form-control" placeholder="Write about userself"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="password-section">
-                                <h6>Update Password</h6>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>New Password</label>
-                                            <input type="password" class="form-control" placeholder="Write new password">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>Repeat Password</label>
-                                            <input type="password" class="form-control" placeholder="Write same password again">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-lg mt-2">Submit</button>
-                        </form>
-                    </div>
-                </div>
-                <!-- START FOOTER -->
-                <DashboardFooter />
             </div>
         </div>
-    </div>
-</section>
-<!-- END SECTION DASHBOARD -->
 
-<a data-scroll href="#wrapper" class="go-up"><i class="fa fa-angle-double-up" aria-hidden="true"></i></a>
-<!-- END FOOTER -->
+        <div v-if="$page.props.auth.user.category == 'agency'" class="dashborad-box curved">
+            <h4 class="title">Agents</h4>
+            <div class="section-body">
+                <p>Register Your agents through this link</p>
+                <div class="row mt-3">
+                    <div class="col-md-10 col-sm-10 col-10">
+                        <div class="form-group">
+                            <input type="text" :value="domain_name + '/register-agent/' +  props.user.email"  id="myInput" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-2">
+                        <i @click="copyLink" class="fa fa-copy"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="dashborad-box curved">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-6">
+                    <h4 class="title">Listings</h4>
+                    
+                </div>
+                <div class="col-md-6 col-sm-6 col-6">
+                    <button id="listing-form-button" @click="toggleListing" type="submit" class="btn btn-primary btn-sm rounded curved p-2 pl-2 pr-2 borderless focus b-primary">show Listings</button>
+                </div>
+            </div>
+            <div class="section-body listing-table d-none" id="listing-form">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Listing Name</th>
+                                <th>Date</th>
+                                <th>Views</th>
+                                <th>Rating</th>
+                                <th>Status</th>
+                                <th>Edit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="property in props.property.data" :key="property.id">
+                                <td>{{ property.title }}</td>
+                                <td>{{ property.created_at_diff }}</td>
+                                <td>{{ property.views }}</td>
+                                <td class="rating"><span>{{ property.average_property_review }}</span></td>
+                                <td class="status"><span class=" active">{{ property.status }}</span></td>
+                                <td class="edit"><Link :href="route('editProperty',property.id)"><i class="fa fa-pencil"></i></Link></td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="dashborad-box d-none">
+            <h4 class="title">Message</h4>
+            <div class="section-body">
+                <div class="messages">
+                    <div class="message">
+                        <div class="thumb">
+                            <img class="img-fluid" src="images/testimonials/ts-1.jpg" alt="">
+                        </div>
+                        <div class="body">
+                            <h6>Mary Smith</h6>
+                            <p class="post-time">22 Minutes ago</p>
+                            <p class="content mb-0 mt-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore</p>
+                            <div class="controller">
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-eye"></i></a></li>
+                                    <li><a href="#"><i class="far fa-trash-alt"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="dashborad-box curved">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-6">
+                    <h4 class="title">Reviews ({{ props.average_review }}.0)</h4>
+                    
+                </div>
+                <div class="col-md-6 col-sm-6 col-6">
+                    <button id="review-form-button" @click="toggleReviewForm" type="submit" class="btn btn-primary btn-sm rounded curved borderless p-2 pl-2 pr-2 focus b-primary">show Reviews</button>
+                </div>
+            </div>
+            <div class="section-body d-none" id="review-form">
+                <div class="messages">
+                    
+                    <div class="message" v-for="review in props.userReview.data" :key="review">
+                        <div class="thumb">
+                            <img class="img-fluid" :src="`/photos/${review.photo}`" alt="">
+                        </div>
+                        <div class="body">
+                            <h6>{{ review.name }}</h6>
+                            <p class="post-time">{{ review.created_at_diff }}</p>
+                            <p class="content mb-0 mt-2">{{ review.review }}</p>
+                            <ul class="starts mb-0">
+                                <li v-if="review.star > 0"><i class="fa fa-star"></i></li>
+                                <li v-else><i class="fa fa-star-o"></i></li>
+                                <li v-if="review.star > 1"><i class="fa fa-star"></i></li>
+                                <li v-else><i class="fa fa-star-o"></i></li>
+                                <li v-if="review.star > 2"><i class="fa fa-star"></i></li>
+                                <li v-else><i class="fa fa-star-o"></i></li>
+                                <li v-if="review.star > 3"><i class="fa fa-star"></i></li>
+                                <li v-else><i class="fa fa-star-o"></i></li>
+                                <li v-if="review.star > 4"><i class="fa fa-star"></i></li>
+                                <li v-else><i class="fa fa-star-o"></i></li>
+                                
+                            </ul>
+                            <div class="controller">
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-eye"></i></a></li>
+                                    <li><a href="#"><i class="far fa-trash-alt"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+    </DashboardLayout>
 </template>
+
+<style scoped>
+
+    #review-form-button{
+
+        float: right
+    }
+
+    #listing-form-button{
+
+        float: right
+    }
+
+    .curved{
+    
+        border-radius: 30px !important;
+    }
+
+    button{
+
+        border: none !important;
+    }
+
+    td{
+
+        white-space: nowrap;
+    }
+
+    .fa-copy{
+
+        font-size: 1.3em !important;
+    }
+
+    .fa-laptop-house{
+
+        color:#f5f5f5
+    }
+
+    .fa-eye{
+
+        color:#f5f5f5
+    }
+
+    input,textarea {
+    
+    background: #f5f5f5;
+    border: none !important;
+    width: 100%;
+    height: 50px;
+    padding-left: 20px;
+    font-weight: 500;
+    margin-bottom: 24px;
+    border-radius: 2em;
+}
+
+
+    @media screen and (max-width: 600px) {
+
+        #review-form-button{
+
+            font-size: 0.7em;
+        }
+
+        #listing-form-button{
+
+            font-size: 0.7em;
+        }
+
+    }
+   
+
+</style>
 
     
 

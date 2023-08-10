@@ -1,7 +1,6 @@
 <script setup>
 import { Head, Link } from '@inertiajs/inertia-vue3';
-import Footer from '@/Components/Footer.vue'
-import Header from '@/Components/Header.vue'
+import GuestLayout from '@/Layouts/GuestLayout.vue'
 
 import { onMounted,onUnmounted } from 'vue'
 
@@ -28,8 +27,8 @@ $('body').removeClass('inner-pages ui-elements hd-white');
 
 </script>
 <template>
-    <Head title="Dashboard" />
-    <Header />
+    <Head title="Frequently Asked Questions" />
+    <GuestLayout>
 
     <section class="headings">
         <div class="text-heading text-center">
@@ -147,8 +146,7 @@ $('body').removeClass('inner-pages ui-elements hd-white');
     </section>
     <!-- END SECTION FAQ -->
     
-    <Footer />
+    </GuestLayout>
 </template>
-
     
 

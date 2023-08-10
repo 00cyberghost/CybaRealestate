@@ -7,7 +7,7 @@ import BreezeInputError from '@/Components/InputError.vue'
 import BreezeLabel from '@/Components/Label.vue'
 import Header from '@/Components/Header.vue'
 import { Head, Link, useForm } from '@inertiajs/inertia-vue3'
-import { onMounted } from 'vue'
+import { onMounted,ref } from 'vue'
 onMounted(() => {
     //launch the register modal
     $('.modal').fadeIn();
@@ -33,9 +33,26 @@ const form = useForm({
     remember: false
 });
 
+let processing = ref(false);
+
 const submit = () => {
     form.post(route('login'), {
-        onFinish: () => form.reset('password'),
+        
+        onStart: () => {
+
+            document.getElementById('sub').textContent = 'Processing...'
+
+            processing.value = true
+            } ,
+            onFinish: () => {
+
+            form.reset('password');
+
+            document.getElementById('sub').textContent = 'Log In'
+
+            processing.value = false;
+        }
+
     });
 };
 </script>
@@ -68,7 +85,7 @@ const submit = () => {
                                     <label>Password * </label>
                                     <input name="password" id="password" type="password" v-model="form.password" required autocomplete="current-password">
                                     <BreezeInputError class="mt-2" :message="form.errors.password" />
-                                    <button type="submit" class="log-submit-btn"><span>Log In</span></button>
+                                    <button :disabled="processing" id="sub" type="submit" class="log-submit-btn"><span>Log In</span></button>
                                     <div class="clearfix"></div>
                                     <div class="filter-tags">
                                         <BreezeCheckbox name="remember" v-model:checked="form.remember" />

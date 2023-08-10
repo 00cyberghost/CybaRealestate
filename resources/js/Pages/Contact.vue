@@ -1,7 +1,6 @@
 <script setup>
 import { Head } from '@inertiajs/inertia-vue3';
-import Footer from '@/Components/Footer.vue'
-import Header from '@/Components/Header.vue'
+import GuestLayout from '@/Layouts/GuestLayout.vue'
 import { onMounted,onUnmounted } from 'vue'
     
     onMounted(() => {
@@ -22,8 +21,8 @@ import { onMounted,onUnmounted } from 'vue'
 
 </script>
 <template>
-    <Head title="Dashboard" />
-    <Header />
+    <Head title="Contact Us" />
+    <GuestLayout>
 
     <section class="headings">
             <div class="text-heading text-center">
@@ -42,7 +41,7 @@ import { onMounted,onUnmounted } from 'vue'
                 <div class="row">
                     <div class="col-lg-8 col-md-12">
                         <h3 class="mb-4">Contact Us</h3>
-                        <form id="contactform" class="contact-form" name="contactform" method="post" novalidate>
+                        <form id="contactform" @submit.prevent="" class="contact-form" name="contactform" method="post" novalidate>
                             <div id="success" class="successform">
                                 <p class="alert alert-success font-weight-bold" role="alert">Your message was sent successfully!</p>
                             </div>
@@ -72,19 +71,19 @@ import { onMounted,onUnmounted } from 'vue'
                                 <li>
                                     <div class="info">
                                         <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                        <p class="in-p">95 South Park Ave, USA</p>
+                                        <p class="in-p">Justine Lodge, Ihiagwa, Imo state, Nigeria</p>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="info">
                                         <i class="fa fa-phone" aria-hidden="true"></i>
-                                        <p class="in-p">+456 875 369 208</p>
+                                        <p class="in-p"><a href="tel:09061495389">+234 9061495389</a></p>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="info">
                                         <i class="fa fa-envelope" aria-hidden="true"></i>
-                                        <p class="in-p ti">support@findhouses.com</p>
+                                        <p class="in-p ti">00cybaghost@gmail.com</p>
                                     </div>
                                 </li>
                                 <li>
@@ -101,8 +100,29 @@ import { onMounted,onUnmounted } from 'vue'
         </section>
         <!-- END SECTION CONTACT US -->
     
-    <Footer />
+    </GuestLayout>
 </template>
-
+<style scoped>
+    input {
     
+        background: #f5f5f5;
+        border: none !important;
+        width: 100%;
+        height: 50px;
+        padding-left: 20px;
+        font-weight: 500;
+        margin-bottom: 24px;
+        border-radius: 2em;
+    }
 
+    textarea {
+    
+    background: #f5f5f5;
+    border: none;
+    width: 100%;
+    padding-left: 20px;
+    font-weight: 500;
+    margin-bottom: 24px;
+    border-radius: 2em;
+}
+</style>

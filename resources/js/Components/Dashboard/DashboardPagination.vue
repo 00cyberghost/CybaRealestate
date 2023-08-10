@@ -1,16 +1,34 @@
 <script setup>
-import { Link } from '@inertiajs/inertia-vue3';
-</script>
-
+    import {onMounted} from 'vue'
+        defineProps({
+            paginations: Object
+        })
+    
+        onMounted(() => {
+    
+            const cleanPagination = () => {
+    
+                let li = document.querySelectorAll('.page-link')
+    
+                let lastList = li.length - 1
+    
+                li[0].textContent = 'Previous'
+    
+                li[lastList].textContent = 'Next'
+    
+            }
+    
+            cleanPagination()
+        })
+    </script>
 <template>
     <div class="pagination-container">
         <nav>
             <ul class="pagination">
-                <li class="page-item"><a class="btn btn-common" href="#"><i class="lni-chevron-left"></i> Previous </a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="btn btn-common" href="#">Next <i class="lni-chevron-right"></i></a></li>
+                <li v-for="link in paginations" :key="link.id" class="page-item" :class="{active: link.active}">
+                    <Link :href="link.url" class="page-link" :class="{active: link.active}">{{ link.label }}</Link>
+            
+                </li>
             </ul>
         </nav>
     </div>

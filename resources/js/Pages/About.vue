@@ -1,11 +1,10 @@
 <script setup>
 import { Head } from '@inertiajs/inertia-vue3';
-import Header from '@/Components/Header.vue'
+import GuestLayout from '@/Layouts/GuestLayout.vue'
 import SearchForm from '@/Components/SearchForm.vue'
 import RecentProperties from '@/Components/RecentProperties.vue'
 import PopularPlaces from '@/Components/PopularPlaces.vue'
 import AgentGrid from '@/Components/AgentGrid.vue'
-import Footer from '@/Components/Footer.vue'
 import { onMounted,onUnmounted } from 'vue'
 
 onMounted(() => {
@@ -93,14 +92,14 @@ onUnmounted(() => {
 
 </script>
 <template>
-    <Head title="Dashboard" />
-    <Header />
+    <Head title="About us" />
+    <GuestLayout >
 
     <section class="headings">
             <div class="text-heading text-center">
                 <div class="container">
                     <h1>About Our Company</h1>
-                    <h2><a href="index.html">Home </a> &nbsp;/&nbsp; About Us</h2>
+                    <h2><Link href="/">Home </Link> &nbsp;/&nbsp; About Us</h2>
                 </div>
             </div>
         </section>
@@ -112,15 +111,15 @@ onUnmounted(() => {
                 <div class="row">
                     <div class="col-lg-6 col-md-12 who-1">
                         <div>
-                            <h2 class="text-left mb-4">About <span>Find Houses</span></h2>
+                            <h2 class="text-left mb-4">About <span>CybaRealEstate</span></h2>
                         </div>
                         <div class="pftext">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum odio id voluptatibus incidunt cum? Atque quasi eum debitis optio ab. Esse itaque officiis tempora possimus odio rerum aperiam ratione, sunt. Lorem ipsum dolor sit amet, consectetur adipisicing elit sunt.</p>
+                            <p>CybaRealEstate is a low cost website and mobile real estate solution developed by cybaghost technologies to to help small and big real estate agents and agencies have a presence on the web.</p>
+                            <p>We tend to develop a market place where customers and property seekers can meet and interact we property agents, agencies and developers</p>
 
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum odio id voluptatibus incidunt cum? Atque quasi eum debitis optio ab. Esse itaque officiis tempora possimus odio rerum aperiam ratione, sunt. Lorem ipsum dolor sit amet, consectetur adipisicing elit sunt.</p>
                         </div>
                         <div class="box bg-2">
-                            <a href="/about.html" class="text-center button button--moema button--text-thick button--text-upper button--size-s">read More</a>
+                            <a target="_blank" href="https://cybaghost.com.ng" class="text-center button button--moema button--text-thick button--text-upper button--size-s b-primary">read More</a>
                             <img src="/images/signature.png" class="ml-5" alt="">
                         </div>
                     </div>
@@ -436,7 +435,7 @@ onUnmounted(() => {
         </div>
         <!-- END SECTION PARTNERS -->
     
-    <Footer />
+    </GuestLayout>
 </template>
 
     

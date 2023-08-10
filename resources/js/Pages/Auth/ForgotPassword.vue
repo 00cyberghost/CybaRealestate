@@ -1,48 +1,86 @@
 <script setup>
-import BreezeButton from '@/Components/PopularPlaces.vue';
-import BreezeGuestLayout from '@/Layouts/Guest.vue';
-import BreezeInput from '@/Components/Input.vue';
-import BreezeInputError from '@/Components/InputError.vue';
-import BreezeLabel from '@/Components/RecentProperties.vue';
-import { Head, useForm } from '@inertiajs/inertia-vue3';
+    import Button from '@/Components/Button.vue'
+    import BreezeCheckbox from '@/Components/Checkbox.vue'
+    import BreezeInput from '@/Components/Input.vue'
+    import BreezeInputError from '@/Components/InputError.vue'
+    import BreezeLabel from '@/Components/Label.vue'
+    import Header from '@/Components/Header.vue'
+    import { Head, Link, useForm } from '@inertiajs/inertia-vue3'
+    import { onMounted,ref } from 'vue'
+    onMounted(() => {
+        //launch the register modal
+        $('.modal').fadeIn();
+    
+        //when the modal is closed
+        $('.close-reg').on("click", function () {
+    
+        $('.modal').fadeOut();
+    
+        history.back();
+    
+        });
+    });
+    
+    defineProps({
+        status: String,
+    });
 
-defineProps({
-    status: String,
-});
+    const form = useForm({
+        email: '',
+    });
 
-const form = useForm({
-    email: '',
-});
-
-const submit = () => {
-    form.post(route('password.email'));
-};
+    const submit = () => {
+        form.post(route('password.email'));
+    };
 </script>
-
+    
 <template>
-    <BreezeGuestLayout>
-        <Head title="Forgot Password" />
+<Header />
 
-        <div class="mb-4 text-sm text-gray-600">
-            Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.
-        </div>
+<!-- Wrapper -->
+<div class="wrapper">
+    <!--login form -->
+    <div class="login-and-register-form modal">
+        <div class="main-overlay"></div>
+        <div class="main-register-holder">
+            <div class="main-register fl-wrap">
+                <div class="close-reg"><i class="fa fa-times"></i></div>
+                <h3>Welcome to <span>Find<strong>Houses</strong></span></h3>
+                
+                
+                <div id="tabs-container">
+                    <div class="tab">
+                        <div id="tab-1" class="tab-contents">
+                            <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
+                                {{ status }}
+                            </div>
+                            <div class="custom-form">
+                                <form  @submit.prevent="submit">
+                                    <label>Username or Email Address * </label>
+                                    <input name="email" id="email" type="text" v-model="form.email" required autofocus autocomplete="username">
+                                    <BreezeInputError class="mt-2" :message="form.errors.email" />
 
-        <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
-            {{ status }}
-        </div>
-
-        <form @submit.prevent="submit">
-            <div>
-                <BreezeLabel for="email" value="Email" />
-                <BreezeInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus autocomplete="username" />
-                <BreezeInputError class="mt-2" :message="form.errors.email" />
+                                    <button :class="{ 'opacity-25': form.processing }" :disabled="form.processing" type="submit" class="log-submit-btn"><span>Email Link</span></button>
+                                    
+                                </form>
+                                <div class="lost_password">
+                                    <Link :href="route('login')">Login</Link>
+                                </div>
+                            </div>
+                        </div>
+                
+                    </div>
+                </div>
             </div>
+        </div>
+    </div>
+    <!--login form end -->
 
-            <div class="flex items-center justify-end mt-4">
-                <BreezeButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Email Password Reset Link
-                </BreezeButton>
-            </div>
-        </form>
-    </BreezeGuestLayout>
+    
+
+</div>
+<!-- Wrapper / End -->
+
+
 </template>
+    

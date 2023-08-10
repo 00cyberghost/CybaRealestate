@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('TC')->nullable();
             $table->string('wifi')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

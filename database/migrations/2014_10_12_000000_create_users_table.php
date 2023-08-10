@@ -15,9 +15,8 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->integer('role_id')->default(1);
+            $table->integer('role_id')->default(0);
             $table->boolean('is_active')->default(true);
-            $table->boolean('verified')->default(false);
             $table->integer('agency_id')->nullable();
             $table->integer('subscription_id')->default(1);
             $table->string('name');
@@ -28,12 +27,21 @@ return new class extends Migration
             $table->string('category');
             $table->string('facebook')->nullable();
             $table->string('twitter')->nullable();
+            $table->string('instagram')->nullable();
             $table->string('youtube')->nullable();
-            $table->integer('image_id')->nullable();
+            $table->string('state')->nullable();
+            $table->string('local_government')->nullable();
+            $table->string('locality')->nullable();
+            $table->string('address')->nullable();
+            $table->string('longitude')->nullable();
+            $table->string('latitude')->nullable();
+            $table->string('image')->nullable();
+            $table->integer('views')->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

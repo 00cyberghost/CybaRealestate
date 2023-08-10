@@ -155,7 +155,7 @@ class ImageWatermarkController extends Controller
             
             $tn = imagecreatetruecolor($modwidth,$modheight);
             
-            $image= imagecreatefromjpeg($file);
+            $image= imagecreatefromgif($file);
             
             imagecopyresampled($tn,$image,0,0,0,0, $modwidth,$modheight,$width,$height);
 
@@ -219,7 +219,7 @@ class ImageWatermarkController extends Controller
             
             $tn = imagecreatetruecolor($modwidth,$modheight);
             
-            $image= imagecreatefromjpeg($file);
+            $image= imagecreatefrompng($file);
             
             imagecopyresampled($tn,$image,0,0,0,0, $modwidth,$modheight,$width,$height);
 
@@ -231,4 +231,327 @@ class ImageWatermarkController extends Controller
 		
 	    
 	}
+
+    /**
+     * stores an image, reduces the image size
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  final name of the image
+     * @return a saved and reduced image
+     */
+
+    //
+	static function cybaghostAgent($request,$imagename){
+		
+        
+        $file = $request->file('file');
+
+        $source = $file;
+        
+        //uploads image to the photos directory
+        $file->move(public_path('photos'),$imagename);
+        
+        $target = public_path('photos/'.$imagename);
+
+        $type = pathinfo($file->getClientOriginalName(),PATHINFO_EXTENSION);
+        
+        //if the file is a jpeg or jpg image
+        if($type == 'jpeg' || $type == 'jpg'){
+        
+            //image size reduction section
+
+            $save= $target; // this is the new file you are saving
+            
+            $file = $target; // this is the original file
+            
+            list($width, $height)= getimagesize($file);
+            
+            $modwidth = 500;
+            
+            $diff= $width / $modwidth;
+            
+            $modheight= 500;
+            
+            $tn = imagecreatetruecolor($modwidth,$modheight);
+            
+            $image= imagecreatefromjpeg($file);
+            
+            imagecopyresampled($tn,$image,0,0,0,0, $modwidth,$modheight,$width,$height);
+
+            imagejpeg($tn,$save,75);
+
+            
+        //if the file is a gif image
+        }elseif($type == 'gif'){
+
+            
+            //size reduction section
+            $save= $target; // this is the new file you are saving
+            
+            $file = $target; // this is the original file
+            
+            list($width, $height)= getimagesize($file);
+            
+            $modwidth = 500;
+            
+            $diff= $width / $modwidth;
+            
+            $modheight= 500;
+            
+            $tn = imagecreatetruecolor($modwidth,$modheight);
+            
+            $image= imagecreatefromgif($file);
+            
+            imagecopyresampled($tn,$image,0,0,0,0, $modwidth,$modheight,$width,$height);
+
+            imagegif($tn,$save,7);
+
+        
+        //if the file is a png image
+        }elseif($type == 'png'){
+
+            
+            //quality reduction section
+            $save= $target; // this is the new file you are saving
+            
+            $file = $target; // this is the original file
+            
+            list($width, $height)= getimagesize($file);
+            
+            $modwidth = 500;
+            
+            $diff= $width / $modwidth;
+            
+            $modheight= 500;
+            
+            $tn = imagecreatetruecolor($modwidth,$modheight);
+            
+            $image= imagecreatefrompng($file);
+            
+            imagecopyresampled($tn,$image,0,0,0,0, $modwidth,$modheight,$width,$height);
+
+            imagepng($tn,$save,9);
+        
+        }
+
+         
+		
+	    
+	}
+
+    /**
+     * stores an image, reduces the image size
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  final name of the image
+     * @return a saved and reduced image
+     */
+
+    //
+	static function cybaghostAgency($request,$imagename){
+		
+        
+        $file = $request->file('file');
+
+        $source = $file;
+        
+        //uploads image to the photos directory
+        $file->move(public_path('photos'),$imagename);
+        
+        $target = public_path('photos/'.$imagename);
+
+        $type = pathinfo($file->getClientOriginalName(),PATHINFO_EXTENSION);
+        
+        //if the file is a jpeg or jpg image
+        if($type == 'jpeg' || $type == 'jpg'){
+        
+            //image size reduction section
+
+            $save= $target; // this is the new file you are saving
+            
+            $file = $target; // this is the original file
+            
+            list($width, $height)= getimagesize($file);
+            
+            $modwidth = 200;
+            
+            $diff= $width / $modwidth;
+            
+            $modheight= 200;
+            
+            $tn = imagecreatetruecolor($modwidth,$modheight);
+            
+            $image= imagecreatefromjpeg($file);
+            
+            imagecopyresampled($tn,$image,0,0,0,0, $modwidth,$modheight,$width,$height);
+
+            imagejpeg($tn,$save,75);
+
+            
+        //if the file is a gif image
+        }elseif($type == 'gif'){
+
+            
+            //size reduction section
+            $save= $target; // this is the new file you are saving
+            
+            $file = $target; // this is the original file
+            
+            list($width, $height)= getimagesize($file);
+            
+            $modwidth = 200;
+            
+            $diff= $width / $modwidth;
+            
+            $modheight= 200;
+            
+            $tn = imagecreatetruecolor($modwidth,$modheight);
+            
+            $image= imagecreatefromgif($file);
+            
+            imagecopyresampled($tn,$image,0,0,0,0, $modwidth,$modheight,$width,$height);
+
+            imagegif($tn,$save,7);
+
+        
+        //if the file is a png image
+        }elseif($type == 'png'){
+
+            
+            //quality reduction section
+            $save= $target; // this is the new file you are saving
+            
+            $file = $target; // this is the original file
+            
+            list($width, $height)= getimagesize($file);
+            
+            $modwidth = 200;
+            
+            $diff= $width / $modwidth;
+            
+            $modheight= 200;
+            
+            $tn = imagecreatetruecolor($modwidth,$modheight);
+            
+            $image= imagecreatefrompng($file);
+            
+            imagecopyresampled($tn,$image,0,0,0,0, $modwidth,$modheight,$width,$height);
+
+            imagepng($tn,$save,9);
+        
+        }
+
+         
+		
+	    
+	}
+
+    /**
+     * stores an image, reduces the image size
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  final name of the image
+     * @return a saved and reduced image
+     */
+
+    //
+	static function cybaghostReview($request,$imagename){
+		
+        
+        $file = $request->file('file');
+
+        $source = $file;
+        
+        //uploads image to the photos directory
+        $file->move(public_path('photos'),$imagename);
+        
+        $target = public_path('photos/'.$imagename);
+
+        $type = pathinfo($file->getClientOriginalName(),PATHINFO_EXTENSION);
+        
+        //if the file is a jpeg or jpg image
+        if($type == 'jpeg' || $type == 'jpg'){
+        
+            //image size reduction section
+
+            $save= $target; // this is the new file you are saving
+            
+            $file = $target; // this is the original file
+            
+            list($width, $height)= getimagesize($file);
+            
+            $modwidth = 300;
+            
+            $diff= $width / $modwidth;
+            
+            $modheight= 300;
+            
+            $tn = imagecreatetruecolor($modwidth,$modheight);
+            
+            $image= imagecreatefromjpeg($file);
+            
+            imagecopyresampled($tn,$image,0,0,0,0, $modwidth,$modheight,$width,$height);
+
+            imagejpeg($tn,$save,75);
+
+            
+        //if the file is a gif image
+        }elseif($type == 'gif'){
+
+            
+            //size reduction section
+            $save= $target; // this is the new file you are saving
+            
+            $file = $target; // this is the original file
+            
+            list($width, $height)= getimagesize($file);
+            
+            $modwidth = 300;
+            
+            $diff= $width / $modwidth;
+            
+            $modheight= 300;
+            
+            $tn = imagecreatetruecolor($modwidth,$modheight);
+            
+            $image= imagecreatefromgif($file);
+            
+            imagecopyresampled($tn,$image,0,0,0,0, $modwidth,$modheight,$width,$height);
+
+            imagegif($tn,$save,7);
+
+        
+        //if the file is a png image
+        }elseif($type == 'png'){
+
+            
+            //quality reduction section
+            $save= $target; // this is the new file you are saving
+            
+            $file = $target; // this is the original file
+            
+            list($width, $height)= getimagesize($file);
+            
+            $modwidth = 300;
+            
+            $diff= $width / $modwidth;
+            
+            $modheight= 300;
+            
+            $tn = imagecreatetruecolor($modwidth,$modheight);
+            
+            $image= imagecreatefrompng($file);
+            
+            imagecopyresampled($tn,$image,0,0,0,0, $modwidth,$modheight,$width,$height);
+
+            imagepng($tn,$save,9);
+        
+        }
+
+         
+		
+	    
+	}
+
+
 }

@@ -37,7 +37,7 @@ class image extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function property(): BelongsToMany
+    public function properties(): BelongsToMany
     {
         return $this->belongsToMany(Property::class);
     }

@@ -1,76 +1,91 @@
 <script setup>
-    import { onMounted,onUnmounted } from 'vue'
+    import { Head } from '@inertiajs/inertia-vue3';
+    import { onMounted,onUnmounted,ref } from 'vue'
+
+    
+
+    let isChecked = ref(false)
+ 
+    const handleColorChange = {
+
+        //start the methods
+        changeColor: function(theme){
+            this.storeThemeColor(theme)
+            this.setThemeColor()
+        },
+
+        //write the theme color to localstorage
+        storeThemeColor : function(theme){
+            localStorage.setItem('theme-color',theme)
+        },
+
+        //get the theme color from local storage
+        getThemeColor : function(){
+            return localStorage.getItem('theme-color')
+        },
+
+        //set the theme color
+        setThemeColor : function(){
+            
+            //first get the color from local storage
+            let color = this.getThemeColor()
+            
+            //set the theme color by giving the document body an id
+            document.querySelector('body').setAttribute('id',color)
+        },
+
+        //set darkmode
+        darkMode : function(event){
+            let mode = document.getElementById('mode')
+            
+            if(event.target.classList.contains('checked')){
+                mode.removeAttribute('href')
+                //remove darkmode from local storage
+                localStorage.removeItem('dark-mode')
+                isChecked.value = false
+                
+            }else{
+                mode.setAttribute('href','css/colors/dark-mode.css')
+                //write darkmode to local storage
+                localStorage.setItem('dark-mode','yes')
+                isChecked.value = true
+            }
+          
+        },
+
+        //check if user already dark mode
+        checkMode : function(){
+            
+            let box = document.getElementById('mode')
+            if(box.hasAttribute('href')) isChecked.value = true
+             
+        }
+        
+    }
+
+    //launch mobile nav bar
+    const launchMobileNav = () => document.getElementById('offcanvasNavbar').classList.remove('d-none')
+
+    //remove mobile nav bar
+    const removeMobileNav = () => document.getElementById('offcanvasNavbar').classList.add('d-none')
 
     onMounted(() => {
+        document.querySelectorAll('.offcanvas-body a').forEach((e) => {
+            e.addEventListener('click',removeMobileNav)
+        })
+        handleColorChange.checkMode()
 
-            //add the dashboard css stylesheet immediately the component mounts and some other classes that are necessary for page responsiveness
-            $('#search-form').append('<link id="dashboard-style" rel="stylesheet"><link rel="stylesheet" href="/css/swiper.min.css">');
-            $('body').addClass('maxw1600 m0a dashboard-bd');
-            $('#wrapper').addClass('int_main_wraapper');
-        
-
-            $(".dropdown-filter").on('click', function() {
-
-                $(".explore__form-checkbox-list").toggleClass("filter-block");
-
-            });
-
-            
-
-            $(".header-user-name").on("click", function() {
-                $(".header-user-menu ul").toggleClass("hu-menu-vis");
-                $(this).toggleClass("hu-menu-visdec");
-            });
-
-            
-            $(window).resize(function() { mmenuInit(); });
-
-            function mmenuInit() {
-            var wi = $(window).width();
-            if(wi <= '992') {
-
-                $('#footer').removeClass("sticky-footer");
-
-                $(".mmenu-init" ).remove();
-                $("#navigation").clone().addClass("mmenu-init").insertBefore("#navigation").removeAttr('id').removeClass('style-1 style-2').find('ul').removeAttr('id');
-                $(".mmenu-init").find(".container").removeClass("container");
-
-                $(".mmenu-init").mmenu({
-                    "counters": true
-                }, {
-                // configuration
-                offCanvas: {
-                    pageNodetype: "#wrapper"
-                }
-                });
-
-                var mmenuAPI = $(".mmenu-init").data( "mmenu" );
-                var $icon = $(".hamburger");
-
-                $(".mmenu-trigger").click(function() {
-                    mmenuAPI.open();
-                });
-
-                mmenuAPI.bind( "open:finish", function() {
-                setTimeout(function() {
-                    $icon.addClass( "is-active" );
-                });
-                });
-                mmenuAPI.bind( "close:finish", function() {
-                setTimeout(function() {
-                    $icon.removeClass( "is-active" );
-                });
-                });
-
-
-            }
-
-            
-            $(".mm-next").addClass("mm-fullsubopen");
-        }
-
-        mmenuInit();
-
+        //add the dashboard css stylesheet immediately the component mounts and some other classes that are necessary for page responsiveness
+        // $('#search-form').append('<link id="dashboard-style" rel="stylesheet"><link rel="stylesheet" href="/css/swiper.min.css">');
+        $('body').addClass('maxw1600 m0a dashboard-bd');
+        $('#wrapper').addClass('int_main_wraapper');
+        $(".dropdown-filter").on('click', function() {
+            $(".explore__form-checkbox-list").toggleClass("filter-block");
+        });
+        $(".header-user-name").on("click", function() {
+            $(".header-user-menu ul").toggleClass("hu-menu-vis");
+            $(this).toggleClass("hu-menu-visdec");
+        });
         /*  User Menu */
         $('.user-menu').on('click', function(){
             $(this).toggleClass('active');
@@ -89,6 +104,101 @@
     <!-- START SECTION HEADINGS -->
     <!-- Header Container
     ================================================== -->
+        <div class="offcanvas d-none p-3" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+            <a href="#" @click="removeMobileNav"><i class="fas fa-times"></i></a>    
+        </div>
+        <div class="offcanvas-body">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li v-if="$page.props.auth.user" class="nav-item" role="presentation">
+                    <button class="nav-link active" id="dashboard-tab" data-toggle="tab" data-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">Dashboard</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div v-if="$page.props.auth.user" class="tab-pane fade show active" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+                    <div class="row mt-5" v-if="$page.props.auth.user.category == 'agent'">
+                        <Link v-if="$page.props.auth.user.role_id > 1" class="col-6 truncate" :href="route('showPendingProperties')">Pending</Link>
+                         <Link class="col-6" :href="route('dashboard')">Dashboard</Link>
+                        <Link class="col-6" :href="route('profile')">Profile</Link>
+                        <Link class="col-6 truncate" :href="route('myProperties')">My Properties</Link>
+                        <Link class="col-6 truncate" :href="route('bookmarks')">My Favourites</Link>
+                        <Link class="col-6 truncate" :href="route('myAlerts')">My Property Alerts</Link>
+                        <Link class="col-6 truncate" :href="route('myRequests')">My Property Requests</Link>
+                        <Link class="col-6" :href="route('logout')" method="post">Log Out</Link>
+                        <Link class="ui-elements col-6">
+                            <div class="checkbox-option pull-right mt-2" :class="{'checked': isChecked == true}" @click="handleColorChange.darkMode">
+                                <div class="inner" :class="{'checked': isChecked == true}"></div>
+                                <input type="checkbox" name="checkbox" value="Checkbox" :class="{'checked': isChecked == true}" />
+                            </div>
+                        </Link>
+                    </div>
+
+                    <div class="row mt-5" v-if="$page.props.auth.user.category == 'agency'">
+                        <Link class="col-6" :href="route('dashboard')">Dashboard</Link>
+                        <Link class="col-6" :href="route('profile')">Profile</Link>
+                        <Link class="col-6 truncate" :href="route('myProperties')">My Properties</Link>
+                        <Link class="col-6" :href="route('logout')" method="post">Log Out</Link>
+                        <Link class="ui-elements col-6">
+                            <div class="checkbox-option pull-right mt-2" :class="{'checked': isChecked == true}" @click="handleColorChange.darkMode">
+                                <div class="inner" :class="{'checked': isChecked == true}"></div>
+                                <input type="checkbox" name="checkbox" value="Checkbox" :class="{'checked': isChecked == true}" />
+                            </div>
+                        </Link>
+                    </div>
+
+                    <div class="row mt-5" v-if="$page.props.auth.user.category == 'customer'">
+                         <Link class="col-6" :href="route('dashboard')">Dashboard</Link>
+                        <Link class="col-6" :href="route('profile')">Profile</Link>
+                        <Link class="col-6 truncate" :href="route('bookmarks')">My Favourites</Link>
+                        <Link class="col-6 truncate" :href="route('myAlerts')">My Property Alerts</Link>
+                        <Link class="col-6 truncate" :href="route('myRequests')">My Property Requests</Link>
+                        <Link class="col-6" :href="route('logout')" method="post">Log Out</Link>
+                        <Link class="ui-elements col-6">
+                            <div class="checkbox-option pull-right mt-2" :class="{'checked': isChecked == true}" @click="handleColorChange.darkMode">
+                                <div class="inner" :class="{'checked': isChecked == true}"></div>
+                                <input type="checkbox" name="checkbox" value="Checkbox" :class="{'checked': isChecked == true}" />
+                            </div>
+                        </Link>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+                    <div class="row mt-5">
+                        <Link class="col-4" :href="route('home')">Home</Link>
+                        <Link class="col-4" :href="route('forRent')">For Rent</Link>
+                        <Link class="col-4" :href="route('forSale')">For Sale</Link>
+                        <Link class="col-4" :href="route('forShortlet')">Shortlets</Link>
+                        <Link class="col-4" :href="route('agencies')">Agencies</Link>
+                        <Link class="col-4" :href="route('agents')">Agents</Link>
+                        <Link class="col-4" :href="route('requests')">Requests</Link>    
+                        <Link class="col-4" :href="route('about')">About Us</Link>
+                        <Link class="col-4" :href="route('faq')">Faq</Link>
+                        <Link class="col-4" :href="route('contact')">Contact Us</Link>
+                        
+                    
+                        <Link class="col-4" v-if="!$page.props.auth.user" :href="route('register')">Register</Link>
+                        <Link class="col-4 d-none d-xl-none d-block d-lg-block" v-if="!$page.props.auth.user" :href="route('login')">Login</Link>
+                        <Link class="col-4 d-none d-xl-none d-block d-lg-block" v-if="!$page.props.auth.user" :href="route('register')">Register</Link>
+                        <Link class="col-4 d-none d-xl-none d-block d-lg-block"  v-if="$page.props.auth.user" :href="route('logout')" method="post" as="button">Log Out</Link>
+                        <Link class="ui-elements">
+                            <div class="checkbox-option pull-right mt-2" :class="{'checked': isChecked == true}" @click="handleColorChange.darkMode">
+                                <div class="inner" :class="{'checked': isChecked == true}"></div>
+                                <input type="checkbox" name="checkbox" value="Checkbox" :class="{'checked': isChecked == true}" />
+                            </div>
+                        </Link>
+                        
+                    </div>
+
+
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
     <div class="dash-content-wrap">
         <header id="header-container" class="db-top-header">
             <!-- Header -->
@@ -101,23 +211,34 @@
                             <Link :href="route('home')"><img src="/images/logo.svg" alt=""></link>
                         </div>
                         <!-- Mobile Navigation -->
-                        <div class="mmenu-trigger">
+                        <div class="mmenu-trigger" @click="launchMobileNav">
                             <button class="hamburger hamburger--collapse" type="button">
                                 <span class="hamburger-box">
-                        <span class="hamburger-inner"></span>
+                            <span class="hamburger-inner"></span>
                                 </span>
                             </button>
                         </div>
                         <!-- Main Navigation -->
                         <nav id="navigation" class="style-1">
-                            <ul id="responsive">
+                            <ul id="responsive" v-if="$page.props.auth.user.category == 'agent'">
                                 <li><Link :href="route('home')">Home</Link></li>
+                                <li><Link :href="route('profile')">Profile</Link></li>
                                 <li><Link :href="route('myProperties')">My properties</Link></li>
                                 <li><Link :href="route('bookmarks')">Favourites</Link></li>
-                                <li><Link :href="route('addProperty')">Add Listing <i class="fas fa-laptop-house ml-2"></i></Link></li>
                                     
                                 <li class="d-none d-xl-none d-block d-lg-block"><Link as="button" :href="route('logout')" method="post">Log Out</Link></li>
-                                <li class="d-none d-xl-none d-block d-lg-block mt-5 pb-4 ml-5 border-bottom-0"><Link :href="route('addProperty')" class="button border btn-lg btn-block text-center">Add Listing<i class="fas fa-laptop-house ml-2"></i></Link></li>
+                            </ul>
+                            <ul id="responsive" v-if="$page.props.auth.user.category == 'agency'">
+                                <li><Link :href="route('home')">Home</Link></li>
+                                <li><Link :href="route('profile')">Profile</Link></li>
+                                <li><Link :href="route('agencyProperties')">My properties</Link></li>
+                                <li class="d-none d-xl-none d-block d-lg-block"><Link as="button" :href="route('logout')" method="post">Log Out</Link></li>
+                            </ul>
+                             <ul id="responsive" v-if="$page.props.auth.user.category == 'customer'">
+                                <li><Link :href="route('home')">Home</Link></li>
+                                <li><Link :href="route('profile')">Profile</Link></li>
+                                <li><Link :href="route('bookmarks')">Favourites</Link></li>
+                                <li class="d-none d-xl-none d-block d-lg-block"><Link as="button" :href="route('logout')" method="post">Log Out</Link></li>
                             </ul>
                         </nav>
                         <!-- Main Navigation / End -->
@@ -126,12 +247,9 @@
                     <!-- Right Side Content / --> 
                     <div class="header-user-menu user-menu">
                         <div class="header-user-name">
-                            <span><img src="/images/testimonials/ts-1.jpg" alt=""></span>{{ $page.props.auth.user.name.slice(0,6) + '..' }}!
+                            <span><img :src="`/photos/${ $page.props.auth.user.image}`" alt=""></span>{{ $page.props.auth.user.name.slice(0,6) + '..' }}!
                         </div>
                         <ul>
-                            <li><Link :href="route('myRequests')">My requests</Link></li>
-                            <li><Link :href="route('myAlerts')">My alerts</Link></li>
-        
                             <li><Link class="pl-3" :href="route('logout')" method="post" as="button">Log Out</Link></li>
                         </ul>
                     </div>
@@ -144,113 +262,70 @@
     <div class="clearfix"></div>
     <!-- Header Container / End -->
 </template>
-<style>
+<style scoped>
 
-.dashboard_navigationbar {
-    margin-bottom: 30px;
-}
-.dashboard_navigationbar .dropbtn {
-    background-color: rgb(255, 255, 255);
-    border: none;
-    border-radius: 5px;
-    display: block;
-    height: 70px;
-    margin-bottom: 30px;
-    outline: none;
-    padding: 20px 30px;
-    position: relative;
-    text-align: left;
-    width: 100%;
-}
-.dashboard_navigationbar .dropbtn:hover,
-.dashboard_navigationbar .dropbtn:focus {
-    background-color: rgb(255, 255, 255);
-    border: none;
-    cursor: pointer;
-    outline: none;
-}
-.dashboard_navigationbar .dropdown {
-    position: relative;
-}
-.dashboard_navigationbar .dropdown-content {
-    box-shadow: none;
-    display: none;
-    height: auto;
-    min-width: 160px;
-    overflow: auto;
-    position: absolute;
-    top: 0;
-}
-.dashboard_navigationbar .dropdown-content a,button {
-    color: black;
-    padding: 10px 16px;
-    text-decoration: none;
-    display: block;
-}
-.dashboard_navigationbar .dropdown-content li {
-    height: 50px;
-    line-height: 30px;
-    padding-left: 0;
-    position: relative;
-}
-.dashboard_navigationbar .dropdown-content li a {
-    font-size: 16px;
-}
-.dashboard_navigationbar .dropdown-content li a span {
-    font-size: 23px;
-    padding-right: 10px;
-}
-.dashboard_navigationbar .dropdown-content li.active {
-    background-color: #ffffff;
-}
-.dashboard_navigationbar .dropdown-content li a.active:before {
-    background-color: #274abb;
-    bottom: 0;
-    content: "";
-    height: 50px;
-    position: absolute;
-    right: 0px;
-    top: 0;
-    width: 2px;
-}
-.dashboard_navigationbar .dropdown-content li a.active {
-    color: #274abb;
-}
-.dashboard_navigationbar .dropdown a:hover {
-    color: #004a97;
-}
-.dashboard_navigationbar .show {
-    display: block;
-    background: #fff;
-    -webkit-animation: fadein 2s;
-    -moz-animation: fadein 2s;
-    -ms-animation: fadein 2s;
-    -o-animation: fadein 2s;
-    animation: fadein 1s;
-    overflow: hidden;
-    padding: 15px 0;
-    position: relative;
-    min-height: auto;
-    min-width: auto;
-    width: 100%;
-}
-@keyframes fadein {
-    from {
-        opacity: 0;
+@media screen and (max-width:1024px) {
+    .offcanvas a, a:active,a:focus,a:visited{
+        color: #fff !important;
     }
-    to {
-        opacity: 1;
+
+    .offcanvas{
+        position: fixed !important;
+        min-height: 100vmax;
+        background: #212529 !important;
+        z-index: 999999999999999999999999999999999 !important;
+        width: 100% !important;
+        max-width: 100%;
+        color: #fff !important;
     }
-}
-@media only screen and (max-width: 992px) {
-    .mobile-dashbord.dashbord {
-        padding-top: 45px;
+
+    .offcanvas-body{
+        position: relative !important;
     }
-}
-@media only screen and (min-width: 1025px) {
-    .dashxl {
-        display: none;
+
+    .tab-content{
+        position: absolute !important;
+        min-height: 80vmax !important;
+        height: 80vmax !important;
+        overflow-y: auto !important;
+        width: 100%;
+        padding-left: 5px;
+        margin-top: 1.5rem;
+        overflow-y: hidden !important;
     }
+
+    .offcanvas-header{
+        min-height: 3rem;
+    }
+
+    .offcanvas-header a{
+        float: right;
+        margin-right: 1rem;
+        font-size: 1.5rem;
+        color: #fff !important;
+    }
+
+    .offcanvas-body .tab-pane .row{
+        
+        row-gap: 2em !important;
+    }
+
+
+    .offcanvas-body .tab-pane .row a:hover,a:focus,a:active{
+        background: var(--BGCOLOR) !important;
+    }
+
+    .checkbox-options{
+        color: #fff !important;
+    }
+
+    #offcanvasNavbar .ui-elements div{
+        background: #fff !important;
+        background-color: #fff !important;
+        padding: 0 !important;
+    }
+    
 }
+
 
 </style>

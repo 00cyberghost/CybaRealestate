@@ -7,8 +7,8 @@
         category: '',
         name: '',
         email: '',
-        phone: '',
-        whatsapp: '',
+        phone: null,
+        whatsapp: null,
         password: '',
         password_confirmation: '',
         terms: false,
@@ -22,10 +22,17 @@
         form.category = el;
         
         form.post(route('register'), {
-            onStart: () => processing.value = true ,
+            onStart: () => {
+
+                document.getElementById('sub').textContent = 'Processing...'
+
+                processing.value = true
+            } ,
             onFinish: () => {
 
                 form.reset('password', 'password_confirmation');
+
+                document.getElementById('sub').textContent = 'Register'
 
                 processing.value = false;
             }
@@ -145,7 +152,7 @@
                                                 <span class="mt-1">Customer</span>
                                             </div>
                                         </div>
-                                        <label id="name-label" for="email">Agent Name * </label>
+                                        <label id="name-label" for="name">Agent Name * </label>
                                         <input id="name" minlength="3" v-model="form.name" required autofocus type="text">
                                         <InputError class="mt-2" :message="form.errors.name" />
                                         
@@ -191,4 +198,12 @@
     
             
     </template>
+    <style scoped>
+        /**this is very important because users in the system cant be sorted if this style ir removed */
+        #name{
+
+            text-transform: capitalize;
+        }
+    
+    </style>
     

@@ -1,0 +1,502 @@
+/* root variables */
+:root{
+	--BGCOLOR: #f55d2c;
+	--BGLITE: #f55e2c59;
+	/* color-scheme: normal; */
+}
+
+#dark-gray{
+	--BGCOLOR: #687389;
+	--BGLITE: hsla(220, 14%, 47%, 0.481);
+}
+
+#dark-orange{
+	--BGCOLOR: #f55d2c;
+	--BGLITE: hsla(15, 91%, 57%, 0.349);
+}
+
+#dark-blue{
+	--BGCOLOR: #274abb;
+	--BGLITE: hsla(226, 65%, 44%, 0.349);
+}
+
+#green{
+	--BGCOLOR: #18ba60;
+	--BGLITE: hsla(147, 77%, 41%, 0.349);
+}
+
+#light-black{
+	--BGCOLOR: #293046;
+	--BGLITE: hsla(226, 26%, 22%, 0.349);
+}
+
+#light-purple{
+	--BGCOLOR: #6449E7;
+	--BGLITE: hsla(250, 77%, 60%, 0.349);
+}
+
+#pink{
+	--BGCOLOR: #FF385C;
+	--BGLITE: hsla(349, 100%, 61%, 0.349);
+}
+
+#yellow{
+	--BGCOLOR: #f5b200;
+	--BGLITE: hsla(44, 100%, 48%, 0.349);
+}
+
+
+
+
+
+
+
+
+
+
+
+.header-top {
+	background: var(--BGCOLOR);
+}
+#main-menu ul li a:hover {
+	background: var(--BGCOLOR);
+}
+#main-menu .dropdown-menu a:hover {
+	background: var(--BGCOLOR);
+}
+.bloq-search input[type="text"] {
+	border: 1px solid var(--BGCOLOR);
+}
+.bloq-search input[type="submit"] {
+	background: var(--BGCOLOR);
+}
+.google-maps .filter {
+	background: var(--BGCOLOR);
+}
+.section-title:before {
+	background-color: var(--BGCOLOR);
+}
+.section-title h2 {
+	color: var(--BGCOLOR);
+}
+.homepage-4 .slick-prev:hover,
+.homepage-4 .slick-next:hover {
+    background: var(--BGCOLOR);
+}
+.slick-prev.slick-disabled:hover, 
+.slick-next.slick-disabled:hover {
+    background: var(--BGCOLOR);
+}
+.recently .homes-content .homes-list li {
+	color: var(--BGCOLOR);
+}
+.recently .homes-content .homes-list li i {
+	color: var(--BGCOLOR);
+}
+.first-footer .bloq-email .email input[type="submit"] {
+	background: var(--BGCOLOR);
+}
+#navigation.style-1 .current {
+    color: var(--BGCOLOR);
+}
+#navigation.style-1 ul li:hover {
+    background: var(--BGCOLOR);
+}
+.twitter-widget.contuct .twitter-area .text h5 a {
+	color: var(--BGCOLOR);
+}
+.first-footer .contactus ul li .fa {
+    color: var(--BGCOLOR);
+}
+.first-footer .newsletters h3::after {
+    background: var(--BGCOLOR);
+}
+a.button.border, a.button {
+    background: var(--BGCOLOR);
+}
+.slick-prev:hover,
+.slick-next:hover {
+    color: transparent;
+    outline: none;
+    background: var(--BGCOLOR);
+}
+.welcome-title h2 span,
+.welcome-title h2 span {
+	color: var(--BGCOLOR);
+}
+.welcome .popup-youtube {
+	color: var(--BGCOLOR);
+}
+.welcome .wprt-image-video .iq-waves .waves {
+	background: rgb(24, 186, 96) none repeat scroll 0 0 padding-box;
+}
+.services-home .bg-base {
+	background: var(--BGCOLOR);
+}
+.services-home a.text-base {
+	color: var(--BGCOLOR);
+}
+.portfolio .homes-content .homes-list li {
+	color: var(--BGCOLOR);
+}
+.portfolio .homes-content .homes-list li i {
+	color: var(--BGCOLOR);
+}
+.top-location .owl-theme .owl-nav [class*=owl-] {
+	background: var(--BGCOLOR);
+}
+.blog-section .news-item a:hover h3 {
+	color: var(--BGCOLOR);
+}
+.blog-section .news-link {
+	color: var(--BGCOLOR);
+}
+.testimonials .test-1 p::before {
+	color: var(--BGCOLOR);
+}
+.testimonials .test-1 h3 {
+	color: var(--BGCOLOR);
+}
+.owl-dot.active {
+	background: var(--BGCOLOR) !important;
+}
+.counterup .countr .fa {
+	color: var(--BGCOLOR);
+}
+.realhome_subscribe input {
+	border-color: var(--BGCOLOR);
+}
+.realhome_form_subscribe button {
+	background: var(--BGCOLOR);
+	border: 2px solid var(--BGCOLOR);
+}
+.first-footer .netabout h3::after,
+.first-footer .navigation h3::after,
+.first-footer .widget h3::after,
+.first-footer .contactus h3::after {
+	background-color: var(--BGCOLOR);
+}
+.first-footer .btn {
+	background: var(--BGCOLOR);
+}
+.first-footer .btn:hover {
+	background: transparent;
+}
+.navigation ul li a:hover {
+	color: var(--BGCOLOR);
+}
+.twitter-widget.contuct .twitter-area .icon-holder i {
+	color: var(--BGCOLOR);
+}
+.twitter-widget.contuct .twitter-area .text h4,
+.inner-pages .twitter-widget.contuct .twitter-area .text h4 {
+	color: var(--BGCOLOR);
+}
+.second-footer {
+	background: var(--BGCOLOR);
+}
+.go-up {
+	background: var(--BGCOLOR);
+}
+.main-search-field {
+	background: var(--BGCOLOR);
+}
+.btn-default.btn-theme-colored2:hover {
+	background: var(--BGCOLOR);
+}
+.text-theme-colored2 {
+	color: var(--BGCOLOR) !important;
+}
+.btn-dark.btn-theme-colored {
+	background-color: var(--BGCOLOR);
+}
+.parallax-search .form-group .nice-select:hover {
+	color: var(--BGCOLOR);
+}
+.parallax-search .form-group .nice-select i {
+	color: var(--BGCOLOR);
+}
+.parallax-search .form-group .list li:hover {
+	background: var(--BGCOLOR);
+}
+.parallax-search .form-group .btn {
+	background: var(--BGCOLOR);
+}
+.inner-pages .blog .active-view-btn:hover {
+	background: var(--BGCOLOR) !important;
+}
+.inner-pages .change-view-btn:hover {
+	color: var(--BGCOLOR) !important;
+}
+.inner-pages .blog .block-heading .change-view-btn.lde:hover {
+	background: var(--BGCOLOR);
+}
+.inner-pages .blog .section-heading .media .media-left i {
+	background: var(--BGCOLOR);
+}
+.inner-pages .blog .main-search-field select {
+	background: var(--BGCOLOR);
+}
+.inner-pages .blog .at-input {
+	border: 2px solid var(--BGCOLOR);
+}
+.inner-pages .blog .ui-widget.ui-widget-content {
+	background: var(--BGCOLOR);
+}
+.inner-pages .blog .hvr-bounce-to-right {
+	background: var(--BGCOLOR);
+}
+.inner-pages .widget h5::after {
+	background-color: var(--BGCOLOR);
+}
+.inner-pages .portfolio .footer i {
+	color: var(--BGCOLOR);
+}
+.inner-pages .recent-post .tags a:hover {
+	color: var(--BGCOLOR);
+	border-color: var(--BGCOLOR);
+}
+.page-item.active .page-link {
+    background: var(--BGCOLOR);
+    border-color: var(--BGCOLOR);
+}
+.page-link {
+    color: var(--BGCOLOR);
+}
+.inner-pages .blog .homes-content.details-2 .fa {
+	color: var(--BGCOLOR);
+}
+.inner-pages .blog .sorting-options h5 {
+	color: var(--BGCOLOR);
+}
+.inner-pages .blog .homes-content h5::after,
+.inner-pages .blog .blog-info.details h5::after,
+.inner-pages .blog .property-location h5::after,
+.inner-pages .blog .team.assigned h5::after {
+	color: var(--BGCOLOR);
+	background-color: var(--BGCOLOR);
+}
+.inner-pages .blog .homes-content.details .fa {
+	color: var(--BGCOLOR);
+}
+.inner-pages .button.alt {
+	background-color: var(--BGCOLOR);
+}
+.inner-pages .agent-details a:hover {
+	color: var(--BGCOLOR);
+}
+.inner-pages .agent-details .fa {
+	color: var(--BGCOLOR);
+}
+.inner-pages .about-us .who-1 h2 span {
+	color: var(--BGCOLOR);
+}
+.inner-pages .about-us .wprt-image-video .icon-wrap {
+	background-color: var(--BGCOLOR);
+}
+.bg-2 .button {
+    border-color: var(--BGCOLOR);
+}
+.inner-pages .panel .panel-heading a {
+	background: var(--BGCOLOR);
+}
+.plan-price {
+	background: var(--BGCOLOR);
+}
+.plan-price:after {
+	border-top-color: var(--BGCOLOR);
+}
+.plan a.btn {
+	background: var(--BGCOLOR);
+}
+.inner-pages .top-headings h2 {
+	color: var(--BGCOLOR);
+}
+.inner-pages .port-info .btn {
+	background: #fa2964;
+	border: 1px solid var(--BGCOLOR);
+}
+#login .btn_1, a.btn_1 {
+    background: var(--BGCOLOR);
+}
+.inner-pages .blog .social .date {
+	background-color: var(--BGCOLOR);
+}
+.blog-pots figure {
+	background: var(--BGCOLOR);
+}
+.blog .blog-pots .fa {
+	color: var(--BGCOLOR);
+}
+.btn-secondary {
+	background: var(--BGCOLOR);
+}
+.single-blog-post .img-box .overlay {
+	background: rgba(24, 186, 96, 0.8);
+}
+.inner-pages .form-control {
+	border: 1px solid var(--BGCOLOR);
+}
+.inner-pages .input-group-btn .btn-primary {
+	background: var(--BGCOLOR);
+	border: 1px solid var(--BGCOLOR);
+}
+.inner-pages .input-group-btn .btn-primary:hover {
+	color: var(--BGCOLOR);
+}
+.inner-pages .comments-info h5 {
+	color: var(--BGCOLOR);
+}
+.inner-pages .comments h3::after,
+.inner-pages .leve-comments h3::after {
+	background-color: var(--BGCOLOR);
+}
+.inner-pages .leve-comments .btn {
+	background: var(--BGCOLOR);
+	border: 1px solid var(--BGCOLOR);
+}
+.inner-pages .leve-comments .btn:hover {
+	border: 1px solid var(--BGCOLOR);
+}
+.inner-pages .contact-us .btn {
+	background: var(--BGCOLOR);
+	border: 1px solid var(--BGCOLOR);
+}
+.inner-pages .contact-us .btn:hover {
+	border: 1px solid var(--BGCOLOR);
+}
+.inner-pages .call-info h3::after {
+	background-color: var(--BGCOLOR);
+}
+.inner-pages .call-info ul li .fa {
+	color: var(--BGCOLOR);
+}
+.inner-pages .single-add-property > h3 {
+	color: var(--BGCOLOR);
+}
+.inner-pages .prperty-submit-button > button {
+	background: var(--BGCOLOR) none repeat scroll 0 0;
+}
+.leaflet-div-icon, .map-marker {
+	background-color: var(--BGCOLOR);
+	border: 5px solid var(--BGCOLOR);
+}
+.leaflet-div-icon:before, .map-marker:before {
+	border-top-color: var(--BGCOLOR);
+}
+.listing-window-image:before {
+	background-color: var(--BGCOLOR);
+}
+.listing-window-content h3 {
+	background-color: var(--BGCOLOR);
+}
+/*------ BUTTOM HOVER EFFECT ------*/
+.bg-all {
+    position: relative;
+    display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+    margin-top: 1.7rem;
+    transition: all .3s ease;
+}
+@media screen and (max-width: 767px) {
+    .bg-all {
+        margin-top: 10px !important;
+    }
+}
+.btn.btn-outline-light {
+    background-color: var(--BGCOLOR);
+    color: #fff;
+    border-color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+	border-radius: 3rem;
+	padding: .9rem 2.5rem .9rem 2rem;
+    transition: all .3s ease;
+}
+.btn.btn-outline-light:hover {
+    background: var(--BGLITE);
+    color: #fff;
+    transition: all .3s ease;
+}
+.btn.btn-outline-light:after {
+	content: '\f0a9';
+	font-family: 'FontAwesome';
+	position: relative;
+	left: .5rem;
+	transition: all .2s ease;
+}
+.btn.btn-outline-light:hover:after {
+	left: 1rem;
+    color: #fff;
+	transform: rotateZ(-360deg);
+}
+section.pricing-table {
+	padding: 6rem 0;
+	background: #fff;
+}
+.blog-section .action-list .fa-comment {
+    color: var(--BGCOLOR);
+}
+.blog-section .action-list .fa-share-alt {
+    color: var(--BGCOLOR);
+}
+.blog-section .action-list .fa-heart {
+    color: var(--BGCOLOR);
+}
+.section-title:before {
+    background-color: var(--BGCOLOR);
+}
+.info-help .info-head .info-text .btn-pro {
+    background: var(--BGCOLOR);
+}
+.slick-dots li.slick-active {
+    box-shadow: inset 0 0 0 6px var(--BGCOLOR);
+}
+.slick-dots li {
+    color: var(--BGCOLOR);
+    box-shadow: inset 0 0 0 2px var(--BGCOLOR);
+}
+.slick-dots li:after {
+    background-color: var(--BGCOLOR);
+}
+.newsletters p, 
+.first-footer .netabout p {
+    color: rgba(245, 255, 255, 0.8);
+}
+.first-footer .contactus .info p {
+    color: rgba(245, 255, 255, 0.8);
+}
+.first-footer .contactus ul li .fa, .first-footer h3, .navigation ul li a, .twitter-widget.contuct .twitter-area .icon-holder i, .twitter-widget.contuct .twitter-area .text h5 {
+    color: #fff;
+}
+.first-footer .bloq-email .email input[type="email"] {
+    border: 1px solid var(--BGCOLOR);
+    background: #282d32;
+    color: #fff;
+}
+.second-footer p {
+    color: rgba(245, 255, 255, 0.8);
+}
+.second-footer p .fa-heart:before {
+    color: var(--BGCOLOR);
+}
+.ui-widget-header {
+    background: var(--BGCOLOR);
+}
+.google-maps .filter .button {
+    background: var(--BGCOLOR);
+}
+.portfolio .homes-content h3 a:hover {
+    color:  var(--BGCOLOR);
+}
+.homepage-1 .portfolio .footer i {
+    color: var(--BGCOLOR);
+}
+@media screen and (max-width: 767px) {
+    .ui-widget-header,
+    .google-maps .filter .button {
+        background: #000;
+    }
+}
